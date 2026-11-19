@@ -1,0 +1,68 @@
+[project]
+name = "pipecat-aircaps"
+version = "0.1.0"
+description = "AirCaps Live speech-to-text for Pipecat voice agents"
+readme = "README.md"
+license = "BSD-2-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "AirCaps" }]
+keywords = ["pipecat", "speech-to-text", "stt", "voice-agents", "realtime", "aircaps"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = ["pipecat-ai>=1.16.0,<2"]
+
+[project.urls]
+Homepage = "https://aircaps.ai"
+Documentation = "https://aircaps.ai/docs/guides/live-1"
+Repository = "https://github.com/aircaps/pipecat-aircaps"
+Issues = "https://github.com/aircaps/pipecat-aircaps/issues"
+Changelog = "https://github.com/aircaps/pipecat-aircaps/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+example = ["pipecat-ai[cartesia,openai,runner,silero,webrtc]>=1.16.0,<2", "python-dotenv"]
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "ruff>=0.9"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pipecat_aircaps"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/examples", "/README.md", "/CHANGELOG.md", "/LICENSE"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["B", "D", "F", "I", "UP"]
+
+[tool.ruff.lint.isort]
+known-third-party = ["pipecat"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"examples/**/*.py" = ["D"]
+"tests/**/*.py" = ["D"]

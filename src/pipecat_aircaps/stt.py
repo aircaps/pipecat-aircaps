@@ -90,7 +90,7 @@ class AirCapsLiveSTTSettings(STTSettings):
     """Settings for AirCapsLiveSTTService.
 
     Parameters:
-        model: The AirCaps model id. Defaults to ``"aircaps-live-1"``.
+        model: The AirCaps AI model id. Defaults to ``"aircaps-live-1"``.
         language: Transcription language. AirCaps Live 1 transcribes English.
         end_of_turn_mode: How the model trades speed for certainty when it
             detects the end of a turn: ``"min_latency"``, ``"balanced"`` (the
@@ -119,7 +119,7 @@ class AirCapsLiveSTTSettings(STTSettings):
 class AirCapsLiveSTTService(WebsocketSTTService):
     """Speech-to-text service using AirCaps Live 1.
 
-    Streams audio to AirCaps over a WebSocket and pushes interim transcripts as
+    Streams audio to AirCaps AI over a WebSocket and pushes interim transcripts as
     the user speaks.
 
     By default Pipecat decides when a turn ends: when VAD reports that the user
@@ -133,7 +133,7 @@ class AirCapsLiveSTTService(WebsocketSTTService):
     recommends ``ExternalUserTurnStrategies``, so the user aggregator follows
     these frames rather than its own VAD and turn analyzer.
 
-    Before each connection the service asks the AirCaps API where to connect
+    Before each connection the service asks the AirCaps AI API where to connect
     (``GET /v1/realtime/endpoint``), so audio goes straight to the machine
     running the model.
     """
@@ -153,11 +153,11 @@ class AirCapsLiveSTTService(WebsocketSTTService):
         ttfs_p99_latency: float | None = AIRCAPS_LIVE_TTFS_P99,
         **kwargs,
     ):
-        """Initialize the AirCaps Live STT service.
+        """Initialize the AirCaps Live 1 STT service.
 
         Args:
-            api_key: AirCaps API key.
-            base_url: AirCaps API address, used to look up the WebSocket address.
+            api_key: AirCaps AI API key.
+            base_url: AirCaps AI API address, used to look up the WebSocket address.
             sample_rate: Input audio sample rate. If None, uses the pipeline's
                 input rate. Audio is resampled to 16 kHz before it is sent.
             end_of_turn: Whether the model detects the end of each turn, rather
@@ -212,7 +212,7 @@ class AirCapsLiveSTTService(WebsocketSTTService):
         """Check if this service can generate processing metrics.
 
         Returns:
-            True, as AirCaps Live STT supports metrics generation.
+            True, as AirCaps Live 1 STT supports metrics generation.
         """
         return True
 
@@ -333,7 +333,7 @@ class AirCapsLiveSTTService(WebsocketSTTService):
         if self._is_open():
             return
         try:
-            logger.debug("Connecting to AirCaps Live STT")
+            logger.debug("Connecting to AirCaps Live 1 STT")
             url = await self._websocket_url()
             websocket = await self._websocket_connect(
                 url, additional_headers={"Authorization": f"Bearer {self._api_key}"}
@@ -347,17 +347,17 @@ class AirCapsLiveSTTService(WebsocketSTTService):
             self._final_length = 0
             self._last_interim = ""
             self._websocket = websocket
-            logger.info(f"{self}: Connected to AirCaps Live STT")
+            logger.info(f"{self}: Connected to AirCaps Live 1 STT")
             await self._call_event_handler("on_connected")
         except Exception as e:
             self._websocket = None
-            await self.push_error(error_msg=f"Unable to connect to AirCaps: {e}", exception=e)
+            await self.push_error(error_msg=f"Unable to connect to AirCaps AI: {e}", exception=e)
 
     async def _disconnect_websocket(self):
         websocket = self._websocket
         try:
             if websocket and websocket.state is State.OPEN:
-                logger.debug(f"{self}: Disconnecting from AirCaps Live STT")
+                logger.debug(f"{self}: Disconnecting from AirCaps Live 1 STT")
                 await websocket.send(json.dumps({"type": "finish"}))
                 await websocket.close()
         except Exception as e:
@@ -369,7 +369,7 @@ class AirCapsLiveSTTService(WebsocketSTTService):
             await self._call_event_handler("on_disconnected")
 
     async def _websocket_url(self) -> str:
-        """Ask the AirCaps API where to open this model's WebSocket."""
+        """Ask the AirCaps AI API where to open this model's WebSocket."""
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 f"{self._base_url}/v1/realtime/endpoint",
@@ -487,7 +487,7 @@ class AirCapsLiveSTTService(WebsocketSTTService):
             await self._on_transcript(data)
         elif kind == "error":
             await self.push_error(
-                error_msg=f"AirCaps error {data.get('code')}: {data.get('message')}"
+                error_msg=f"AirCaps AI error {data.get('code')}: {data.get('message')}"
             )
         elif kind == "session_limit":
             # The server ends the session next; the receive loop reconnects.

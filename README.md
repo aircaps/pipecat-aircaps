@@ -3,14 +3,14 @@
 [![PyPI](https://img.shields.io/pypi/v/pipecat-aircaps)](https://pypi.org/project/pipecat-aircaps/)
 [![CI](https://github.com/aircaps/pipecat-aircaps/actions/workflows/ci.yml/badge.svg)](https://github.com/aircaps/pipecat-aircaps/actions/workflows/ci.yml)
 
-[AirCaps](https://aircaps.ai) speech-to-text for [Pipecat](https://github.com/pipecat-ai/pipecat).
+[AirCaps AI](https://aircaps.ai) speech-to-text for [Pipecat](https://github.com/pipecat-ai/pipecat).
 
 `AirCapsLiveSTTService` streams the user's audio to **AirCaps Live 1** (`aircaps-live-1`), a low-latency English
 speech-to-text model built for voice agents. It pushes interim transcripts while the user speaks, and when VAD
 reports the end of speech it asks for the turn's final transcript at once. It can also let the model decide when each
 turn ends (`end_of_turn=True`).
 
-Maintained by AirCaps, the company that provides AirCaps Live 1. This is a Pipecat community integration.
+Maintained by AirCaps AI, the company that provides AirCaps Live 1. This is a Pipecat community integration.
 
 ## Installation
 
@@ -22,7 +22,7 @@ or `pip install pipecat-aircaps`.
 
 ## Prerequisites
 
-An AirCaps API key: sign in to the [AirCaps console](https://console.aircaps.ai), open **API keys** and create one.
+An AirCaps AI API key: sign in to the [AirCaps AI Console](https://console.aircaps.ai), open **API keys** and create one.
 AirCaps Live 1 is available to every account, one session at a time by default
 ([talk to us](https://aircaps.ai/contact) for more). The [AirCaps Live 1 guide](https://aircaps.ai/docs/guides/live-1)
 describes the model and its protocol.
@@ -58,8 +58,8 @@ provides when it has a VAD analyzer (`LLMUserAggregatorParams(vad_analyzer=Siler
 
 | Parameter | Default | |
 | --- | --- | --- |
-| `api_key` | required | AirCaps API key |
-| `base_url` | `https://api.aircaps.com` | AirCaps API address |
+| `api_key` | required | AirCaps AI API key |
+| `base_url` | `https://api.aircaps.com` | AirCaps AI API address |
 | `sample_rate` | pipeline input rate | Input audio rate. Audio is resampled to 16 kHz before it is sent |
 | `end_of_turn` | `False` | Let the model detect the end of each turn (see below) |
 | `should_interrupt` | `True` | With `end_of_turn`: whether a new user turn interrupts the bot |
@@ -116,7 +116,7 @@ Not supported by AirCaps Live 1: languages other than English, key terms, speake
 ## Running the example
 
 [`examples/voice-agent.py`](examples/voice-agent.py) is Pipecat's standard voice agent (OpenAI LLM, Cartesia voice)
-with AirCaps as its speech-to-text.
+with AirCaps AI as its speech-to-text.
 
 ```bash
 git clone https://github.com/aircaps/pipecat-aircaps.git
@@ -135,7 +135,7 @@ uv sync
 uv run pytest
 ```
 
-The tests run against a local fake of the AirCaps API; no key is needed.
+The tests run against a local fake of the AirCaps AI API; no key is needed.
 
 ## Compatibility
 
@@ -143,7 +143,7 @@ Tested with Pipecat v1.16.0, on Python 3.11, 3.12 and 3.13.
 
 ## Support
 
-Open an [issue](https://github.com/aircaps/pipecat-aircaps/issues), or [contact AirCaps](https://aircaps.ai/contact).
+Open an [issue](https://github.com/aircaps/pipecat-aircaps/issues), or [contact AirCaps AI](https://aircaps.ai/contact).
 
 ## License
 

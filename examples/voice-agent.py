@@ -7,7 +7,7 @@
 """A voice agent that listens with AirCaps Live 1.
 
 The usual Pipecat voice agent (see Pipecat's examples/getting-started/06-voice-agent.py)
-with AirCaps as its speech-to-text.
+with AirCaps AI as its speech-to-text.
 
     uv run examples/voice-agent.py
 

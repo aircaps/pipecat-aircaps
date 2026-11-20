@@ -1,12 +1,12 @@
 [project]
 name = "pipecat-aircaps"
-version = "0.1.0"
-description = "AirCaps Live speech-to-text for Pipecat voice agents"
+version = "0.1.1"
+description = "AirCaps Live 1 speech-to-text from AirCaps AI for Pipecat voice agents"
 readme = "README.md"
 license = "BSD-2-Clause"
 license-files = ["LICENSE"]
 requires-python = ">=3.11"
-authors = [{ name = "AirCaps" }]
+authors = [{ name = "AirCaps AI" }]
 keywords = ["pipecat", "speech-to-text", "stt", "voice-agents", "realtime", "aircaps"]
 classifiers = [
     "Development Status :: 4 - Beta",

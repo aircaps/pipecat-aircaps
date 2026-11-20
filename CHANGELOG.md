@@ -6,6 +6,13 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-20
+
+### Changed
+
+- The company is named AirCaps AI in the README, docstrings, log and error messages, and the package metadata.
+  No change in behavior.
+
 ## [0.1.0] - 2026-11-19
 
 ### Added
@@ -26,5 +33,6 @@ All notable changes to this project are documented here. The format follows
 
 Tested with Pipecat v1.16.0.
 
-[Unreleased]: https://github.com/aircaps/pipecat-aircaps/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/aircaps/pipecat-aircaps/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/aircaps/pipecat-aircaps/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/aircaps/pipecat-aircaps/releases/tag/v0.1.0
